@@ -87,7 +87,7 @@ $result = $bbs->select();
       <tbody>
         <?php foreach ($result as $row) : ?>
           <tr class="row">
-            <td><?= nl2br(htmlspecialchars($row['name'])) ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
             <td><?= nl2br(htmlspecialchars($row['comment'])) ?></td>
             <td><?= htmlspecialchars($row['post_date']) ?></td>
             <td><?= htmlspecialchars($row['mod_date']) ?></td>

@@ -72,13 +72,13 @@ $result = $bbs->select();
             <tr>
               <th>Name</th>
               <td>
-                <input type="text" name="name" class="form-control" value='<?= nl2br(htmlspecialchars($edit_recode["name"])) ?>' pattern=".*\S+.*" required>
+                <input type="text" name="name" class="form-control" value='<?= (htmlspecialchars($edit_recode["name"])) ?>' pattern=".*\S+.*" required>
               </td>
             </tr>
             <tr>
               <th>Comment</th>
               <td>
-                <textarea name="comment" rows="3" class="form-control" pattern=".*\S+.*" required><?= nl2br(htmlspecialchars($edit_recode['comment'])) ?></textarea>
+                <textarea name="comment" rows="3" class="form-control" pattern=".*\S+.*" required><?= htmlspecialchars($edit_recode['comment']) ?></textarea>
               </td>
             </tr>
             <tr>
@@ -91,7 +91,7 @@ $result = $bbs->select();
             </tr>
           </tbody>
         </table>
-        <input type="hidden" name="id" value=<?= nl2br(htmlspecialchars($edit_recode['id'])) ?>>
+        <input type="hidden" name="id" value=<?= (htmlspecialchars($edit_recode['id'])) ?>>
       </form>
     <?php endif; ?>
 
@@ -110,7 +110,7 @@ $result = $bbs->select();
         <?php foreach ($result as $row) : ?>
           <form name="edit" action="" method="post">
             <tr class="row">
-              <td><?= nl2br(htmlspecialchars($row['name'])) ?></td>
+              <td><?= htmlspecialchars($row['name']) ?></td>
               <td><?= nl2br(htmlspecialchars($row['comment'])) ?></td>
               <td><?= htmlspecialchars($row['post_date']) ?></td>
               <td><?= htmlspecialchars($row['mod_date']) ?></td>
