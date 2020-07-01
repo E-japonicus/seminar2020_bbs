@@ -24,16 +24,3 @@ function checkDelete(){
 	}
 
 }
-
-// Confirmation when deleting
-function checkLogin(){
-	if(window.confirm('Can I delete it?')){
-		// When OK is pressed
-		return true;
-	} else{
-		// When canceled
-		window.alert('Delete canceled');
-		return false;
-	}
-
-}

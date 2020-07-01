@@ -20,6 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_submit'])) {
   }
 }
 
+// edit
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit'])) {
+  // Get record to edit
+  $edit_recode = $bbs->edit();
+}
+
 // delete
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['del_submit'])) {
   $bbs->delete();
@@ -66,13 +72,13 @@ $result = $bbs->select();
             <tr>
               <th>Name</th>
               <td>
-                <input type="text" name="name" class="form-control" value='<?= $_POST["name"]; ?>' pattern=".*\S+.*" required>
+                <input type="text" name="name" class="form-control" value='<?= nl2br(htmlspecialchars($edit_recode["name"])) ?>' pattern=".*\S+.*" required>
               </td>
             </tr>
             <tr>
               <th>Comment</th>
               <td>
-                <textarea name="comment" rows="3" class="form-control" pattern=".*\S+.*" required><?= $_POST['comment'] ?></textarea>
+                <textarea name="comment" rows="3" class="form-control" pattern=".*\S+.*" required><?= nl2br(htmlspecialchars($edit_recode['comment'])) ?></textarea>
               </td>
             </tr>
             <tr>
@@ -85,7 +91,7 @@ $result = $bbs->select();
             </tr>
           </tbody>
         </table>
-        <input type="hidden" name="id" value=<?= $_POST['id'] ?>>
+        <input type="hidden" name="id" value=<?= nl2br(htmlspecialchars($edit_recode['id'])) ?>>
       </form>
     <?php endif; ?>
 
@@ -116,8 +122,6 @@ $result = $bbs->select();
               </td>
             </tr>
             <input type="hidden" name="id" value=<?= htmlspecialchars($row['id']) ?>>
-            <input type="hidden" name="name" value=<?= htmlspecialchars($row['name']) ?>>
-            <input type="hidden" name="comment" value=<?= htmlspecialchars($row['comment']) ?>>
           </form>
         <?php endforeach; ?>
       </tbody>

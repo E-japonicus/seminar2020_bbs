@@ -39,7 +39,8 @@ class bbs
     { 
         extract($_POST);
 
-        $stmt = $this->pdo->prepare('INSERT INTO bbs (`name`, `comment`) VALUES(:name, :comment)');
+        $sql = 'INSERT INTO bbs (`name`, `comment`) VALUES(:name, :comment)';
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":name",    $name,    PDO::PARAM_STR);
         $stmt->bindValue(":comment", $comment, PDO::PARAM_STR);
         $stmt->execute();
@@ -51,7 +52,8 @@ class bbs
     {
         extract($_POST);
 
-        $stmt = $this->pdo->prepare('UPDATE bbs SET name = :name, comment = :comment WHERE id = :id');
+        $sql = 'UPDATE bbs SET name = :name, comment = :comment WHERE id = :id';
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":name",       $name,      PDO::PARAM_STR);
         $stmt->bindValue(":comment",    $comment,   PDO::PARAM_STR);
         $stmt->bindValue(":id",         $id,        PDO::PARAM_INT);
@@ -64,10 +66,23 @@ class bbs
     {
         extract($_POST);
 
-        $stmt = $this->pdo->prepare('DELETE FROM bbs WHERE id = :id');
+        $sql = 'DELETE FROM bbs WHERE id = :id';
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $id,    PDO::PARAM_INT);
         $stmt->execute();
 
         return true;
+    }
+
+    function edit()
+    {
+        extract($_POST);
+
+        $sql = 'SELECT * FROM bbs WHERE id = :id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id,    PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch();
     }
 }
